@@ -7,7 +7,7 @@ Features View Users: Displays a list of users with details (ID, Name, Email, Dep
 Installation
 Clone the repository:
 
-git clone https://github.com/Dileep2109/User-management-dashboard
+git clone https://github.com/Dileep2109/User_management_dashboard
 
 Navigate to the project directory: cd user-management-app
 
