@@ -38,12 +38,13 @@ const App = () => {
       const response = await axios.get('https://jsonplaceholder.typicode.com/users');
       const updatedUsers = response.data.map((user, index) => ({
         ...user,
-        id: index + 1, // Ensure IDs start at 1 and are sequential
+        id: index + 1, 
       }));
       setUsers(updatedUsers);
       localStorage.setItem('users', JSON.stringify(updatedUsers));
-    } catch {
-      console.error('Failed to fetch users');
+    } catch (error) {
+      console.error('Failed to fetch users:', error); 
+      // Handle error gracefully (e.g., display an error message to the user)
     } finally {
       setLoading(false);
     }
@@ -61,7 +62,7 @@ const App = () => {
     const updatedUsers = [...users, userWithId];
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    setEditingUser(null); // Return to home page
+    setEditingUser(null); 
   };
 
   const handleUpdateUser = (updatedUser) => {
@@ -78,7 +79,7 @@ const App = () => {
     );
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    setEditingUser(null); // Return to home page
+    setEditingUser(null); 
   };
 
   const handleDeleteUser = (id) => {
@@ -86,7 +87,7 @@ const App = () => {
       .filter((user) => user.id !== id)
       .map((user, index) => ({
         ...user,
-        id: index + 1, // Reassign IDs sequentially
+        id: index + 1, 
       }));
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
@@ -110,25 +111,25 @@ const App = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">User Management Dashboard</h1>
       {editingUser ? (
-        <UserForm
-          user={editingUser}
-          onSave={editingUser.id ? handleUpdateUser : handleAddUser}
-          onClose={handleFormClose}
-          emailError={emailError}
+        <UserForm 
+          user={editingUser} 
+          onSave={editingUser.id ? handleUpdateUser : handleAddUser} 
+          onClose={handleFormClose} 
+          emailError={emailError} 
         />
       ) : (
         <>
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <UserList
-              users={currentUsers}
-              onEdit={handleEditUser}
-              onDelete={handleDeleteUser}
-              onAdd={() => setEditingUser({})}
+            <UserList 
+              users={currentUsers} 
+              onEdit={handleEditUser} 
+              onDelete={handleDeleteUser} 
+              onAdd={() => setEditingUser({})} 
               paginate={paginate}
-              totalPages={totalPages}
-              currentPage={currentPage}
+              totalPages={totalPages} 
+              currentPage={currentPage} 
             />
           )}
         </>
